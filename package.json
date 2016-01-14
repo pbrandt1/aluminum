@@ -1,0 +1,25 @@
+{
+  "name": "al-vcs",
+  "version": "1.0.0",
+  "description": "aluminum version control system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "git",
+    "hg",
+    "svn",
+    "cvs"
+  ],
+  "author": "Peter Brandt <peter.m.brandt@gmail.com>",
+  "license": "MIT",
+  "preferGlobal": true,
+  "bin": {
+    "al": "index.js"
+  },
+  "dependencies": {
+    "debug": "^2.2.0",
+    "minimist": "^1.2.0"
+  }
+}
