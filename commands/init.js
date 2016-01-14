@@ -3,7 +3,7 @@ var path = require('path')
 var os = require('os')
 
 var default_repo_config = {
-  origin: __dirname
+  origin: process.cwd()
 }
 
 module.exports = function(argv) {
