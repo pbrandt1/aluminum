@@ -79,7 +79,7 @@ al merge colors -m 'feature: add color to tickers'
 All of your commits are automatically squashed into one commit when you merge, and you can add a friendly message to summarize what you did. To see your commit log, type `al log`.
 
 ```
-* a381474 pbrandt1: adding color to tickers (pbrandt1/colors -> master)
+* a381474 pbrandt1: feature: add color to tickers (colors -> master)
 * a194712 pbrandt1: initial commit (master)
 ```
 
