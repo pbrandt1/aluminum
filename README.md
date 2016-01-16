@@ -1,5 +1,31 @@
 ![Aluminum](http://i3.cpcache.com/product/709482292/elements_13_aluminum_tile_coaster.jpg?height=225&width=225)
 
+## Motivation
+
+* Developers want to easily stay up-to-date with master
+* Open source maintainers want other contributors to submit quality patches through easy iteration
+* User interfaces are just as important as CLI
+
+## Quick reference
+
+`npm install -g al-cli` or `npm install -g al-gui`
+
+```sh
+al init
+al clone ssh@sourcehub.space:USER/REPO.al
+al status
+al add [-a]
+al unadd [-a]
+al commit [-a] [-m MESSAGE]
+al revert FILE
+al revert COMMIT
+al checkout [-b] BRANCH
+al update [BRANCH]
+al merge [-m MESSAGE]
+al push [BRANCH]
+al ignore FILES...
+```
+
 ## Tutorial
 
 Aluminum is meant to be easy, starting with the command, `al`.  Wow, doesn’t that just feel great to type?  So much easier than `git` or `hg` or `svn`.

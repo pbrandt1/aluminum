@@ -8,7 +8,8 @@ module.exports = {
     ADDED: 'A',
     MODIFIED: 'M',
     NEW: '?',
-    CONFLICT: 'C',
+    CONFLICT: '!',
+    DELETED: 'D',
     CLEAN: ' '
   }
 }

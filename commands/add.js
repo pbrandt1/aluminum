@@ -2,7 +2,7 @@ var fs = require('fs')
 var path = require('path')
 var debug = require('debug')('al:add')
 var walk = require('walkdir')
-var repoConfig = require('../repo_config')
+var repoConfig
 
 //
 // gets all the files that have been added since last commit
@@ -22,6 +22,7 @@ function isInRepo(filepath) {
 
 
 module.exports = function(argv) {
+  repoConfig = require('../repo_config')(argv.cwd);
   var addedFiles = getAddedTree();
   add(argv._);
   fs.writeFileSync(path.resolve(repoConfig.root, 'added_tree.json'), JSON.stringify(addedFiles), 'utf8')
