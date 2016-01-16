@@ -1,7 +1,7 @@
 var fs = require('fs')
 var path = require('path')
+var os = require('os')
 var debug = require('debug')('al:add')
-var walk = require('walkdir')
 var repoConfig
 
 //
@@ -9,27 +9,32 @@ var repoConfig
 //
 function getAddedTree() {
   try {
-    var t = JSON.parse(fs.readFileSync(path.resolve(repoConfig.root, 'added_tree.json'), 'utf8'));
+    var t = fs.readFileSync(path.resolve(repoConfig.aldir, 'added'), 'utf8').split(os.EOL);
   } catch (e) {
-    t = {}
+    t = []
   }
   return t;
 }
 
 function isInRepo(filepath) {
-  return path.resolve(filepath).indexOf(repoConfig.root) ===0;
+  return path.resolve(filepath).indexOf(repoConfig.root) === 0;
 }
 
 
 module.exports = function(argv) {
-  repoConfig = require('../repo_config')(argv.cwd);
+  repoConfig = require('../util/repo_config')(argv.cwd);
+
   var addedFiles = getAddedTree();
   add(argv._);
-  fs.writeFileSync(path.resolve(repoConfig.root, 'added_tree.json'), JSON.stringify(addedFiles), 'utf8')
+  fs.writeFileSync(path.resolve(repoConfig.aldir, 'added'), addedFiles.join(os.EOL), 'utf8')
 
   function add(files) {
     files.map(function(file) {
       var filepath = path.resolve(process.cwd(), file)
+      var relpath = path.relative(repoConfig.root, filepath) // saved as relpaths
+      if (addedFiles.indexOf(relpath) >= 0) {
+        return;
+      }
       var stats;
       try {
         stats = fs.statSync(filepath);
@@ -43,9 +48,11 @@ module.exports = function(argv) {
             return path.join(file, f)
           }));
           return
+        } else {
+          var relpath = path.relative(repoConfig.root, filepath);
+          debug('adding ' + relpath);
+          addedFiles.push(relpath);
         }
-        debug('adding ' + filepath)
-        addedFiles[filepath] = true;
       }
     })
   }

@@ -33,17 +33,19 @@ module.exports = function (cwd, cb) {
     files.added = fs.readFileSync(path.resolve(repoConfig.aldir, 'added'), 'utf8')
       .split(os.EOL)
       .reduce(function(added, f) {
-        added[f] = true;
+        added[path.resolve(repoConfig.root, f)] = true;
+        return added;
       }, {})
   } catch (e) {
-    files.added = {}
+    files.added = []
   }
 
   try {
     files.conflicts = fs.readFileSync(path.resolve(repoConfig.aldir, 'conflicts'), 'utf8')
       .split(os.EOL)
       .reduce(function(conflicts, f) {
-        conflicts[f] = true;
+        conflicts[path.resolve(repoConfig.root, f)] = true;
+        return conflicts;
       }, {})
   } catch (e) {
     files.conflicts = {}
@@ -61,6 +63,8 @@ module.exports = function (cwd, cb) {
       conflicts: {}
     };
   }
+
+  debug(files);
 
 
   // Get the files yay
