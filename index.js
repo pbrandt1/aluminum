@@ -2,9 +2,17 @@
 
 var debug = require('debug')('al');
 var argv = require('minimist')(process.argv.slice(2));
-argv.command = argv._.splice(0, 1)[0]
-argv.command = require('./util/guess_command')(argv);
-argv.cwd = process.cwd();
-debug(argv)
 
-require('./commands/' + argv.command)(argv);
+// cli or module usage?
+if (argv.lenght > 0) {
+  debug('cli usage')
+  argv.command = argv._.splice(0, 1)[0]
+  argv.command = require('./util/guess_command')(argv);
+  argv.cwd = process.cwd();
+  debug(argv)
+} else {
+  debug('module usage')
+  module.exports = {
+    init: require('./lib/init')
+  }
+}
