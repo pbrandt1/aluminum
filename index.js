@@ -13,6 +13,7 @@ if (argv.lenght > 0) {
 } else {
   debug('module usage')
   module.exports = {
-    init: require('./lib/init')
+    init: require('./lib/init'),
+    add: require('./lib/add')
   }
 }

@@ -6,6 +6,12 @@
 * Open source maintainers want other contributors to submit quality patches through easy iteration
 * User interfaces are just as important as CLI
 
+## Features
+* easily keeps your branch up-to-date with master/trunk
+* branch-level permissions obviate forking
+* tracks issues as part of the revision history
+* it’s written in node.js and is super hackable (and FutureProof™)
+
 ## Quick reference
 
 `npm install -g al-cli` or `npm install -g al-gui`
@@ -26,7 +32,7 @@ al push [BRANCH]
 al ignore FILES...
 ```
 
-## Tutorial
+## CLI Tutorial
 
 Aluminum is meant to be easy, starting with the command, `al`.  Wow, doesn’t that just feel great to type?  So much easier than `git` or `hg` or `svn`.
 
