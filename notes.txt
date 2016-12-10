@@ -1,0 +1,17 @@
+
+
+trunk-based development. commits on branches are always played OVER the last commits on the oringal branch. can branch out multiple layers.
+
+trunk
+|
+--dev
+  |
+  -- peter/feature1
+  |
+  -- graham/wow
+
+
+
+totally module based. can use node.js and fork mutliple children in a way to utilize multiple cores so diffs don't take for freaking ever.
+
+

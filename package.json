@@ -19,11 +19,15 @@
     "al": "index.js"
   },
   "dependencies": {
+    "co": "^4.6.0",
     "colors": "^1.1.2",
     "debug": "^2.2.0",
     "directory-tree": "^0.1.1",
     "minimist": "^1.2.0",
+    "mz": "^2.6.0",
+    "sqlite": "^2.2.4",
     "sqlite3": "^3.1.1",
+    "vvv": "^1.1.0",
     "walkdir": "0.0.11",
     "walker": "^1.0.7"
   },

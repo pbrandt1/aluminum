@@ -2,18 +2,17 @@
 
 var debug = require('debug')('al');
 var argv = require('minimist')(process.argv.slice(2));
+debug(argv)
 
-// cli or module usage?
-if (argv.lenght > 0) {
-  debug('cli usage')
-  argv.command = argv._.splice(0, 1)[0]
-  argv.command = require('./util/guess_command')(argv);
-  argv.cwd = process.cwd();
+// cli or module usage, why not both?
+if ( argv._.length > 0 ) {
+  argv.command = argv._[0]
   debug(argv)
+  argv.command = require('./cli/run_command')(argv);
+  argv.cwd = process.cwd();
 } else {
-  debug('module usage')
   module.exports = {
-    init: require('./lib/init'),
-    add: require('./lib/add')
+    init: require('./init'),
+    add: require('./add')
   }
 }

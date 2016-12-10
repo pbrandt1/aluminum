@@ -1,5 +1,23 @@
-var debug = require('debug')('al')
+var al = require('../lib/util')
+var debug = al.debug
 module.exports = function(argv) {
+  var cmd = guess_command(argv)
+  debug('guessed command ' + cmd)
+
+  var fn = require('../' + cmd)
+  var args = {
+    init: ['.']
+  }[cmd]
+  al.debug('calling ' + cmd + ' with args ' + args)
+
+  fn.apply(null, args).catch(e => {
+    al.debug(e)
+    console.error(e.message)
+    process.exit(1)
+  })
+}
+
+function guess_command(argv) {
   var commands = [
     'add',
     'checkout',
@@ -35,7 +53,7 @@ module.exports = function(argv) {
   }
 
   // use levenshteinDistance
-  return commands.map(function(c) {
+  var cmd = commands.map(function(c) {
     return {
       command: c,
       dist: levenshteinDistance(c, argv.command)
@@ -43,9 +61,10 @@ module.exports = function(argv) {
   }).sort(function(a, b) {
     return a.dist > b.dist ? 1 : -1;
   })[0].command;
+
 }
 
-
+// the old copy-paste from the internet trick
 function levenshteinDistance (a, b){
   if(a.length == 0) return b.length;
   if(b.length == 0) return a.length;
@@ -79,10 +98,3 @@ function levenshteinDistance (a, b){
   console.log(a, b, matrix[b.length][a.length])
   return matrix[b.length][a.length];
 };
-
-if (!module.parent) {
-  var argv = {
-    command: process.argv[2]
-  }
-  console.log(module.exports(argv))
-}

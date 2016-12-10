@@ -1,8 +1,9 @@
 var fs = require('fs')
 var path = require('path')
 var os = require('os')
-var debug = require('debug')('al:add')
-var file_tree = require('./file_tree')
+var al = require('./lib/util')
+var debug = al.debug
+var file_tree = require('./lib/file_tree')
 
 //
 // gets all the files that have been added since last commit
